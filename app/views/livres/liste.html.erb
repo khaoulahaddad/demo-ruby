@@ -1,0 +1,36 @@
+<h1>Liste des Livres</h1>
+
+<table  border=4 cellspacing=4 cellpadding=4 width=80% >
+    <tbody>
+        <tr>
+            <td>NUM</td>
+            <td>Nom Livre</td>
+            <td>Auteur</td>
+            <td>Reference Livre</td>
+            <td>Etat</td>
+        </tr>
+        <% @livres.each do |livre| %>
+            <tr>
+                <td><%= livre.id %></td>
+                <td><%= livre.titre %></td>
+                <td><%= livre.auteur %></td>
+                <td><%= livre.reference %></td>
+                <% if (livre.etat == 'libre') %>
+                <form method="POST" action="/livres/reserver/">
+                    <input name= "id" type="hidden" value="<%= livre.id %>" />
+                    <td><input type="submit" value="Reserver" /></td>
+                </form>     
+
+                <% else %>
+                        <form method="POST" action="/livres/retour/">
+                            <input name= "id" type="hidden" value="<%= livre.id %>" />
+                            <td><input type="submit" value="Retour" /></td>
+                        </form>  
+                <% end %>
+            </tr>
+        <% end %> 
+    </tbody>
+</table>
+<form method="GET" action="/pages/deconnect">
+    <input type="submit" value="Se deconnecter" />
+</form>
